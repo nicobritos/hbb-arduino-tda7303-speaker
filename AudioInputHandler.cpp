@@ -4,8 +4,12 @@
 typedef struct relayInputCDT {
     int8_t pinLeft;
     int8_t pinRight;
+    int8_t pinLeftSW;
+    int8_t pinRightSW;
     uint8_t pinLeftActive;
     uint8_t pinRightActive;
+    uint8_t pinLeftSWActive;
+    uint8_t pinRightSWActive;
 } relayInputCDT;
 
 typedef struct audioEntryCDT {
@@ -22,21 +26,29 @@ audioEntryADT addAudioEntry(uint8_t tdaInput) {
     return audioEntry;
 }
 
-relayInputADT registerRelay(audioEntryADT audioEntry, int8_t pinLeft, uint8_t pinLeftActive, int8_t pinRight, uint8_t pinRightActive) {
+relayInputADT registerRelay(
+    audioEntryADT audioEntry, 
+    int8_t pinLeft, 
+    uint8_t pinLeftActive, 
+    int8_t pinRight, 
+    uint8_t pinRightActive, 
+    int8_t pinLeftSW, 
+    uint8_t pinLeftSWActive, 
+    int8_t pinRightSW, 
+    uint8_t pinRightSWActive) {
     if (audioEntry == NULL || (pinLeft < 0 && pinRight < 0)) return NULL;
     relayInputADT relayInput = malloc(sizeof(*relayInput));
     if (relayInput == NULL) return NULL;
 
-    if (pinLeft >= 0) {
-        pinMode(pinLeft, OUTPUT);
-    }
-    if (pinRight >= 0) {
-        pinMode(pinRight, OUTPUT);
-    }
     relayInput->pinLeft = pinLeft;
     relayInput->pinRight = pinRight;
     relayInput->pinLeftActive = pinLeftActive;
     relayInput->pinRightActive = pinRightActive;
+
+    relayInput->pinLeftSW = pinLeftSW;
+    relayInput->pinRightSW = pinRightSW;
+    relayInput->pinLeftSWActive = pinLeftSWActive;
+    relayInput->pinRightSWActive = pinRightSWActive;
 
     audioEntry->relayInputs.add(relayInput);
 }
@@ -50,7 +62,14 @@ void setAudioInput(audioEntryADT audioEntry) {
             digitalWrite(relayInput->pinLeft, relayInput->pinLeftActive);
         }
         if (relayInput->pinRight >= 0) {
-            digitalWrite(relayInput->pinLeft, relayInput->pinRightActive);
+            digitalWrite(relayInput->pinRight, relayInput->pinRightActive);
+        }
+
+        if (relayInput->pinLeftSW >= 0) {
+            digitalWrite(relayInput->pinLeftSW, relayInput->pinLeftSWActive);
+        }
+        if (relayInput->pinRightSW >= 0) {
+            digitalWrite(relayInput->pinRightSW, relayInput->pinRightSWActive);
         }
     }
 }
