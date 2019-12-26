@@ -39,7 +39,7 @@ static inline uint8_t mapMe(uint8_t value, uint8_t min, uint8_t max) {
     return (max - value) + min;
 }
 
-TDA7303::newAmplifier(uint8_t address) {
+TDA7303::TDA7303(uint8_t address) {
     amplifier->address = address;
 }
 

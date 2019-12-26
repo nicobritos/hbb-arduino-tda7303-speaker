@@ -72,7 +72,7 @@ void InputHandler::registerEncoder(uint8_t pin1, uint8_t pin2, uint8_t code, uin
     0,
     limit,
     0
-  }
+  };
 }
 
 void InputHandler::registerEncoder(uint8_t pin1, uint8_t pin2, uint8_t code, uint8_t limit) {
