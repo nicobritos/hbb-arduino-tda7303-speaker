@@ -18,6 +18,15 @@
     #define ENCODER_1 A6
     #define ENCODER_2 A7
 
+    #define SW_R 5
+    #define SW_L 12
+    #define RELAY_1 6
+    #define RELAY_2 7
+    #define RELAY_3 8
+    #define RELAY_4 9
+    #define RELAY_5 10
+    #define RELAY_6 11
+
     // EEPROM constants
     #define DIRTY_I 60000
 
