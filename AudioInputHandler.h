@@ -14,9 +14,9 @@
         uint8_t pinLeftActive, 
         int8_t pinRight, 
         uint8_t pinRightActive);
-    void setAudioInput(audioEntryADT audioEntry);
-    void setAudioInputLeft(audioEntryADT audioEntry);
-    void setAudioInputRight(audioEntryADT audioEntry);
+    void setAudioInput(TDA7303 amplifier, audioEntryADT audioEntry);
+    void setAudioInputLeft(TDA7303 amplifier, audioEntryADT audioEntry);
+    void setAudioInputRight(TDA7303 amplifier, audioEntryADT audioEntry);
     uint8_t getTDAInput(audioEntryADT audioEntry);
     
 #endif
