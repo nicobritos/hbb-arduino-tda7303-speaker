@@ -1,10 +1,6 @@
 #include "TDA7303.h"
 #include <Arduino.h>
 
-#define TDA_INPUT_1 0x00U
-#define TDA_INPUT_2 0x01U
-#define TDA_INPUT_3 0x02U
-
 #define MAX_ATTENUATION 31
 #define MAX_VOLUME 63
 #define MAX_TREBBLE 7

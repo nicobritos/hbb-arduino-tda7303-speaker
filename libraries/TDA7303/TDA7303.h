@@ -1,7 +1,12 @@
 #ifndef TDA7303_H
     
     #include <Wire.h>
+
     #define TDA7303_H
+
+    #define TDA_INPUT_1 0x00U
+    #define TDA_INPUT_2 0x01U
+    #define TDA_INPUT_3 0x02U
 
     class TDA7303 {
     private:
