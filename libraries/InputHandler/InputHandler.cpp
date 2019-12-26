@@ -28,8 +28,8 @@ InputHandler::InputHandler() {
 void InputHandler::registerPin(uint8_t pin, uint8_t activeType, bool internalPullup) {
   pinMode(pin, INPUT);
   
-  if (activeType == HIGH && internalPullup) {
-    digitalWrite(pin, HIGH);
+  if (activeType == 1 && internalPullup) {
+    digitalWrite(pin, 1);
   }
   
   count++;
@@ -50,12 +50,12 @@ void InputHandler::registerPin(uint8_t pin, uint8_t activeType) {
 void InputHandler::registerEncoder(uint8_t pin1, uint8_t pin2, uint8_t code, uint8_t limit, bool internalPullup1, bool internalPullup2) {
   pinMode(pin1, INPUT);
   if (internalPullup1) {
-    digitalWrite(pin1, HIGH);
+    digitalWrite(pin1, 1);
   }
 
   pinMode(pin2, INPUT);
   if (internalPullup2) {
-    digitalWrite(pin2, HIGH);
+    digitalWrite(pin2, 1);
   }
   
   encoderCount++;
