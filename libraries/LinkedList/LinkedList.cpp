@@ -63,6 +63,21 @@ void LinkedList::remove(uint32_t index) {
     this->removeNode(this->getNode(index));
 }
 
+// Iterator
+void LinkedList::setIterator() {
+    currentIterator = head;
+}
+
+uint8_t LinkedList::hasNext() {
+    currentIterator != NULL;
+}
+
+nodeADT LinkedList::next() {
+    nodeADT aux = currentIterator;
+    currentIterator = currentIterator->next;
+    return aux;
+}
+
 // Private
 void LinkedList::_removeNode(nodeADT node) {
     if (node->previous != NULL) {

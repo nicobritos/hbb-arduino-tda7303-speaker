@@ -10,8 +10,7 @@
     private:
         uint32_t count;
         uint32_t length;
-        nodeADT * head;
-        nodeADT * last;
+        nodeADT head, last, currentIterator;
 
         void LinkedList::_removeNode(nodeADT node);
 
@@ -25,6 +24,11 @@
         void * getElement(nodeADT node);
         void removeNode(nodeADT node);
         void remove(uint32_t index);
+
+        // Iterator
+        void setIterator();
+        uint8_t hasNext();
+        nodeADT next();
     };
 
 #endif
