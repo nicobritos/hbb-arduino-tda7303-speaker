@@ -31,11 +31,7 @@ relayInputADT registerRelay(
     int8_t pinLeft, 
     uint8_t pinLeftActive, 
     int8_t pinRight, 
-    uint8_t pinRightActive, 
-    int8_t pinLeftSW, 
-    uint8_t pinLeftSWActive, 
-    int8_t pinRightSW, 
-    uint8_t pinRightSWActive) {
+    uint8_t pinRightActive) {
     if (audioEntry == NULL || (pinLeft < 0 && pinRight < 0)) return NULL;
     relayInputADT relayInput = malloc(sizeof(*relayInput));
     if (relayInput == NULL) return NULL;
@@ -44,11 +40,6 @@ relayInputADT registerRelay(
     relayInput->pinRight = pinRight;
     relayInput->pinLeftActive = pinLeftActive;
     relayInput->pinRightActive = pinRightActive;
-
-    relayInput->pinLeftSW = pinLeftSW;
-    relayInput->pinRightSW = pinRightSW;
-    relayInput->pinLeftSWActive = pinLeftSWActive;
-    relayInput->pinRightSWActive = pinRightSWActive;
 
     audioEntry->relayInputs.add(relayInput);
 }
@@ -64,12 +55,27 @@ void setAudioInput(audioEntryADT audioEntry) {
         if (relayInput->pinRight >= 0) {
             digitalWrite(relayInput->pinRight, relayInput->pinRightActive);
         }
+    }
+}
 
-        if (relayInput->pinLeftSW >= 0) {
-            digitalWrite(relayInput->pinLeftSW, relayInput->pinLeftSWActive);
+void setAudioInputLeft(audioEntryADT audioEntry) {
+    if (audioEntry == NULL) return NULL;
+    audioEntry->relayInputs.setIterator();
+    while (audioEntry->relayInputs.hasNext()) {
+        relayInputADT relayInput = audioEntry->relayInputs.next();
+        if (relayInput->pinLeft >= 0) {
+            digitalWrite(relayInput->pinLeft, relayInput->pinLeftActive);
         }
-        if (relayInput->pinRightSW >= 0) {
-            digitalWrite(relayInput->pinRightSW, relayInput->pinRightSWActive);
+    }
+}
+
+void setAudioInputRight(audioEntryADT audioEntry) {
+    if (audioEntry == NULL) return NULL;
+    audioEntry->relayInputs.setIterator();
+    while (audioEntry->relayInputs.hasNext()) {
+        relayInputADT relayInput = audioEntry->relayInputs.next();
+        if (relayInput->pinRight >= 0) {
+            digitalWrite(relayInput->pinRight, relayInput->pinRightActive);
         }
     }
 }
