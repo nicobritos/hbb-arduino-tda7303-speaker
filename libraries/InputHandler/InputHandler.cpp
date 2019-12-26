@@ -61,8 +61,8 @@ void InputHandler::registerEncoder(uint8_t pin1, uint8_t pin2, uint8_t code, uin
   encoderCount++;
   if (encoderCount == currentEncoderLength) {
     currentEncoderLength += CHUNK;
-    activeEncoders = (uint8_t*) realloc(activeEncoders, sizeof(*activeEncoders) * currentEncoderLength);
-    encoders = (uint8_t*) realloc(encoders, sizeof(*encoders) * currentEncoderLength);
+    activeEncoders = (encoderCDT*) realloc(activeEncoders, sizeof(*activeEncoders) * currentEncoderLength);
+    encoders = (encoderCDT*) realloc(encoders, sizeof(*encoders) * currentEncoderLength);
   }
   encoders[encoderCount - 1] = {
     pin1,
