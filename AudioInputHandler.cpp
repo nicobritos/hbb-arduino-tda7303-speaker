@@ -13,18 +13,12 @@ typedef struct audioEntryCDT {
     LinkedList relayInputs;
 } audioEntryCDT;
 
-LinkedList audioEntries();
-
 audioEntryADT addAudioEntry(uint8_t tdaInput) {
     audioEntryADT audioEntry = malloc(sizeof(*audioEntry));
     if (audioEntry == NULL) return NULL;
 
     audioEntry->tdaInput = tdaInput;
     audioEntry->relayInputs = new LinkedList();
-    if (!audioEntries.add(audioEntry)) {
-        delete audioEntry;
-        return NULL;
-    }
     return audioEntry;
 }
 
