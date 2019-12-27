@@ -134,7 +134,7 @@ uint8_t InputHandler::updateEncoder(encoderCDT* encoder) {
     if (sum == 0b1101 || sum == 0b0100 || sum == 0b0010 || sum == 0b1011) {
         if (encoder->count < 0)
             encoder->count = 0;
-        if (encoder->count == ENCODER_QTY) {        //Used to increment the number of turns needed to make a change.
+        if (encoder->count == encoder->limit) {        //Used to increment the number of turns needed to make a change.
             encoder->count = 0;
             encoder->actualDirection = 1;
         }
@@ -145,7 +145,7 @@ uint8_t InputHandler::updateEncoder(encoderCDT* encoder) {
     else if (sum == 0b1110 || sum == 0b0111 || sum == 0b0001 || sum == 0b1000) {
         if (encoder->count > 0)
             encoder->count = 0;
-        if (encoder->count == ENCODER_QTY) {
+        if (encoder->count == encoder->limit) {
             encoder->count = 0;
             encoder->actualDirection = -1;
         }
