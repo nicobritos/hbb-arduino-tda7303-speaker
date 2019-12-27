@@ -1,6 +1,8 @@
 #ifndef _C200_DEFINES_H
     #define _C200_DEFINES_H
 
+    #include "Arduino.h"
+
     // Amplifier constants
     #define RCA_0 0
     #define RCA_2 1
@@ -13,6 +15,9 @@
     #define TDA7303_ADDRESS 0x44
 
     // Pins constants
+    #define BUTTON_CFG 0
+    #define BUTTON_INP 1
+    #define BUTTON_MUTE 13
     #define SDA A4
     #define SCL A5
     #define BKLED_PIN 3
@@ -29,6 +34,10 @@
     #define RELAY_6 11
 
     #define ENCODER_QTY 5
+    
+    // Backlight LED
+    #define MAX_BKL 255
+    #define MIN_BKL 0
 
     // EEPROM constants
     #define DIRTY_I 60000
