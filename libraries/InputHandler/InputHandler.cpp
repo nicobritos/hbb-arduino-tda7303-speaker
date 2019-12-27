@@ -6,7 +6,8 @@ typedef struct encoderCDT {
   uint8_t pin1;
   uint8_t pin2;
   uint8_t code;
-  uint8_t lastRead;
+  uint32_t lastRead;
+  uint8_t lastValue;
   int8_t count;
   uint8_t limit;
   int8_t actualDirection;
@@ -123,35 +124,36 @@ int8_t InputHandler::getEncoderDirection(encoderADT encoder) {
 
 // Private
 uint8_t InputHandler::updateEncoder(encoderADT encoder) {
-    /*
-     *  Declare MSB and LSB and store the value read from encoder pins.
-     */
+    if (millis() - encoder->lastRead > CLEAR_ENCODERS) {
+      encoder->lastValue = 0;
+      encoder->count = 0;
+      encoder->actualDirection = 0;
+    }
+
     uint8_t MSB = digitalRead(encoder->pin1);
     uint8_t LSB = digitalRead(encoder->pin2);
     uint8_t encoded = (MSB << 1) | LSB;               //Converting the 2 pin value to single number
-    uint8_t sum  = (encoder->lastRead << 2) | encoded;      //Adding it to the previous encoded value
-    encoder->lastRead = encoded;           //Store this value for next time
+    uint8_t sum  = (encoder->lastValue << 2) | encoded;      //Adding it to the previous encoded value
+    encoder->lastValue = encoded;           //Store this value for next time
     if (sum == 0b1101 || sum == 0b0100 || sum == 0b0010 || sum == 0b1011) {
-        if (encoder->count < 0)
-            encoder->count = 0;
+        if (encoder->count < 0) encoder->count = 0;
         if (encoder->count == encoder->limit) {        //Used to increment the number of turns needed to make a change.
             encoder->count = 0;
             encoder->actualDirection = 1;
-        }
-        else {
+        } else {
             encoder->count++;
         }
-    }
-    else if (sum == 0b1110 || sum == 0b0111 || sum == 0b0001 || sum == 0b1000) {
-        if (encoder->count > 0)
-            encoder->count = 0;
+    } else if (sum == 0b1110 || sum == 0b0111 || sum == 0b0001 || sum == 0b1000) {
+        if (encoder->count > 0) encoder->count = 0;
         if (encoder->count == encoder->limit) {
             encoder->count = 0;
             encoder->actualDirection = -1;
-        }
-        else {
+        } else {
             encoder->count--;
         }
+    } else {
+          encoder->actualDirection = 0;
     }
-    encoder->actualDirection = 0;
+    
+    encoder->lastRead = millis();
 }

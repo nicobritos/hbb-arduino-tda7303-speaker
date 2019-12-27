@@ -3,6 +3,8 @@
 
   #include "Arduino.h"
 
+  #define CLEAR_ENCODERS 500
+
   typedef struct encoderCDT *encoderADT;
 
   class InputHandler {
