@@ -33,8 +33,10 @@
     #define RELAY_5 10
     #define RELAY_6 11
 
+    // Encoder (volume knob)
     #define ENCODER_QTY 5
-    
+    #define ENCODER_INPUT_CODE 0
+
     // Backlight LED
     #define MAX_BKL 255
     #define MIN_BKL 0
@@ -45,6 +47,7 @@
     // Global constants
     #define LEFT 0
     #define RIGHT 1
+    #define BYTE_SIZE 8
 
     typedef struct inputValuesType {
         int8_t bass;
