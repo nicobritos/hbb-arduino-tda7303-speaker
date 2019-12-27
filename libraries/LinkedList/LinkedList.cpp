@@ -15,13 +15,13 @@ LinkedList::~LinkedList() {
     nodeADT aux;
     while (node != NULL) {
         aux = node->next;
-        this->remove(node);
+        this->_removeNode(node);
         node = aux;
     }
 }
 
 nodeADT LinkedList::add(void* element) {
-    nodeADT node = calloc(1, sizeof(*node));
+    nodeADT node = (nodeADT) calloc(1, sizeof(*node));
     if (node == NULL) return NULL;
 
     if (head == NULL) {
@@ -51,7 +51,7 @@ nodeADT LinkedList::getNode(uint32_t index) {
 
 void * LinkedList::getElement(nodeADT node) {
     if (node == NULL) return NULL;
-    return node->element
+    return node->element;
 }
 
 void LinkedList::removeNode(nodeADT node) {

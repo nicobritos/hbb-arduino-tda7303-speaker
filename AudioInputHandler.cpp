@@ -18,11 +18,11 @@ typedef struct audioEntryCDT {
 } audioEntryCDT;
 
 audioEntryADT addAudioEntry(uint8_t tdaInput) {
-    audioEntryADT audioEntry = malloc(sizeof(*audioEntry));
+    audioEntryADT audioEntry = (audioEntryADT) malloc(sizeof(*audioEntry));
     if (audioEntry == NULL) return NULL;
 
     audioEntry->tdaInput = tdaInput;
-    audioEntry->relayInputs = new LinkedList();
+    audioEntry->relayInputs = LinkedList();
     return audioEntry;
 }
 
@@ -33,7 +33,7 @@ relayInputADT registerRelay(
     int8_t pinRight, 
     uint8_t pinRightActive) {
     if (audioEntry == NULL || (pinLeft < 0 && pinRight < 0)) return NULL;
-    relayInputADT relayInput = malloc(sizeof(*relayInput));
+    relayInputADT relayInput = (relayInputADT) malloc(sizeof(*relayInput));
     if (relayInput == NULL) return NULL;
 
     relayInput->pinLeft = pinLeft;
@@ -44,11 +44,11 @@ relayInputADT registerRelay(
     audioEntry->relayInputs.add(relayInput);
 }
 
-void setAudioInput(TDA7303 amplifier, audioEntryADT audioEntry) {
+void setAudioInput(TDA7303 * amplifier, audioEntryADT audioEntry) {
     if (audioEntry == NULL) return NULL;
     audioEntry->relayInputs.setIterator();
     while (audioEntry->relayInputs.hasNext()) {
-        relayInputADT relayInput = audioEntry->relayInputs.next();
+        relayInputADT relayInput = (relayInputADT) audioEntry->relayInputs.getElement(audioEntry->relayInputs.next());
         if (relayInput->pinLeft >= 0) {
             digitalWrite(relayInput->pinLeft, relayInput->pinLeftActive);
         }
@@ -56,31 +56,31 @@ void setAudioInput(TDA7303 amplifier, audioEntryADT audioEntry) {
             digitalWrite(relayInput->pinRight, relayInput->pinRightActive);
         }
     }
-    if (amplifier != NULL) amplifier.setInput(audioEntry->tdaInput);
+    if (amplifier != NULL) amplifier->setInput(audioEntry->tdaInput);
 }
 
-void setAudioInputLeft(TDA7303 amplifier, audioEntryADT audioEntry) {
+void setAudioInputLeft(TDA7303 * amplifier, audioEntryADT audioEntry) {
     if (audioEntry == NULL) return NULL;
     audioEntry->relayInputs.setIterator();
     while (audioEntry->relayInputs.hasNext()) {
-        relayInputADT relayInput = audioEntry->relayInputs.next();
+        relayInputADT relayInput = (relayInputADT) audioEntry->relayInputs.getElement(audioEntry->relayInputs.next());
         if (relayInput->pinLeft >= 0) {
             digitalWrite(relayInput->pinLeft, relayInput->pinLeftActive);
         }
     }
-    if (amplifier != NULL) amplifier.setInput(audioEntry->tdaInput);
+    if (amplifier != NULL) amplifier->setInput(audioEntry->tdaInput);
 }
 
-void setAudioInputRight(TDA7303 amplifier, audioEntryADT audioEntry) {
+void setAudioInputRight(TDA7303 * amplifier, audioEntryADT audioEntry) {
     if (audioEntry == NULL) return NULL;
     audioEntry->relayInputs.setIterator();
     while (audioEntry->relayInputs.hasNext()) {
-        relayInputADT relayInput = audioEntry->relayInputs.next();
+        relayInputADT relayInput = (relayInputADT) audioEntry->relayInputs.getElement(audioEntry->relayInputs.next());
         if (relayInput->pinRight >= 0) {
             digitalWrite(relayInput->pinRight, relayInput->pinRightActive);
         }
     }
-    if (amplifier != NULL) amplifier.setInput(audioEntry->tdaInput);
+    if (amplifier != NULL) amplifier->setInput(audioEntry->tdaInput);
 }
 
 uint8_t getTDAInput(audioEntryADT audioEntry) {

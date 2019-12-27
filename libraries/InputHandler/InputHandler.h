@@ -17,6 +17,8 @@
       uint8_t activeEncoderCount;
       uint8_t encoderCount;
       uint8_t currentEncoderLength;
+      
+      uint8_t InputHandler::updateEncoder(encoderCDT* encoder);
 
     public:
       InputHandler();
@@ -29,7 +31,7 @@
       uint8_t getActivePinsCount();
       uint8_t getActiveEncoderCount();
       const uint8_t * readInputs();
-      const uint8_t * readEncoders();
+      const encoderCDT * readEncoders();
       int8_t getEncoderDirection(encoderCDT* encoder);
       uint8_t getEncoderCode(encoderCDT* encoder);
   };

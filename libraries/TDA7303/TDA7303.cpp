@@ -74,7 +74,7 @@ void TDA7303::setBass(int8_t value) {
     }
 }
 
-void TDA7303::setVolumeTDA(uint8_t value) {
+void TDA7303::setVolume(uint8_t value) {
     if (value >= MIN_VOLUME && value <= MAX_VOLUME) {
         this->volume = value;
         this->send(SUB_ADD_VOLUME, mapMe(this->volume, MIN_VOLUME, MAX_VOLUME));
@@ -100,14 +100,14 @@ void TDA7303::setRight(uint8_t value) {
 void TDA7303::setInput(uint8_t input) {
     if (input == TDA_INPUT_1 || input == TDA_INPUT_2 || input == TDA_INPUT_3) {
         this->input = input;
-        this->update(amplifier);
+        this->update();
     }
 }
 
 void TDA7303::setGain(uint8_t gain) {
     if (gain >= MIN_GAIN && gain <= MAX_GAIN) {
         this->gain = gain;
-        this->update(amplifier);
+        this->update();
     }
 }
 

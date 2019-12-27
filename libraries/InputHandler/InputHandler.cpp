@@ -103,7 +103,6 @@ const encoderCDT * InputHandler::readEncoders() {
   activeEncoderCount = 0;
   
   for (uint8_t ix = 0; ix < encoderCount; ix++) {
-    int8_t result = ;
     if (updateEncoder(encoders[ix])) {
       activeEncoders[activeEncoderCount++] = encoders[ix];
     }
@@ -122,7 +121,8 @@ int8_t InputHandler::getEncoderDirection(encoderCDT* encoder) {
   return encoder->actualDirection;
 }
 
-uint8_t updateEncoder(encoderCDT* encoder) {
+// Private
+uint8_t InputHandler::updateEncoder(encoderCDT* encoder) {
     /*
      *  Declare MSB and LSB and store the value read from encoder pins.
      */
@@ -155,5 +155,3 @@ uint8_t updateEncoder(encoderCDT* encoder) {
     }
     encoder->actualDirection = 0;
 }
-
-

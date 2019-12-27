@@ -4,7 +4,7 @@
 
     #define _LINKED_LIST_H
 
-    typedef nodeCDT *nodeADT;
+    typedef struct nodeCDT *nodeADT;
 
     class LinkedList {
     private:
