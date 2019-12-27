@@ -3,7 +3,6 @@
 
     #include "defines.h"
 
-
     void resetEEPROM();
     void saveSettings(actualConfigType *actualConfig);
     void restoreConfig(actualConfigType *actualConfig);
