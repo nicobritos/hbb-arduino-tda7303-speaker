@@ -12,6 +12,7 @@
 
     #define TDA7303_ADDRESS 0x44
 
+    // Pins constants
     #define SDA A4
     #define SCL A5
     #define BKLED_PIN 3
@@ -27,8 +28,14 @@
     #define RELAY_5 10
     #define RELAY_6 11
 
+    #define ENCODER_QTY 5
+
     // EEPROM constants
     #define DIRTY_I 60000
+
+    // Global constants
+    #define LEFT 0
+    #define RIGHT 1
 
     typedef struct inputValuesType {
         int8_t bass;
