@@ -19,8 +19,8 @@ InputHandler::InputHandler() {
   currentLenght = CHUNK;
   count = activePinsCount = 0;
 
-  activeEncoders = (encoderCDT*) malloc(CHUNK * (sizeof(*activeEncoders)));
-  encoders = (encoderCDT*) malloc(CHUNK * (sizeof(*encoders)));
+  activeEncoders = (encoderADT) malloc(CHUNK * (sizeof(*activeEncoders)));
+  encoders = (encoderADT) malloc(CHUNK * (sizeof(*encoders)));
   currentEncoderLength = CHUNK;
   encoderCount = activeEncoderCount = 0;
 }
@@ -61,8 +61,8 @@ void InputHandler::registerEncoder(uint8_t pin1, uint8_t pin2, uint8_t code, uin
   encoderCount++;
   if (encoderCount == currentEncoderLength) {
     currentEncoderLength += CHUNK;
-    activeEncoders = (encoderCDT*) realloc(activeEncoders, sizeof(*activeEncoders) * currentEncoderLength);
-    encoders = (encoderCDT*) realloc(encoders, sizeof(*encoders) * currentEncoderLength);
+    activeEncoders = (encoderADT) realloc(activeEncoders, sizeof(*activeEncoders) * currentEncoderLength);
+    encoders = (encoderADT) realloc(encoders, sizeof(*encoders) * currentEncoderLength);
   }
   encoders[encoderCount - 1] = {
     pin1,
@@ -99,7 +99,7 @@ uint8_t InputHandler::getActiveEncoderCount() {
   return activeEncoderCount;
 }
 
-const encoderCDT * InputHandler::readEncoders() {
+const encoderADT InputHandler::readEncoders() {
   activeEncoderCount = 0;
   
   for (uint8_t ix = 0; ix < encoderCount; ix++) {
@@ -111,18 +111,18 @@ const encoderCDT * InputHandler::readEncoders() {
   return activeEncoders;
 }
 
-uint8_t InputHandler::getEncoderCode(encoderCDT* encoder) {
+uint8_t InputHandler::getEncoderCode(encoderADT encoder) {
   if (encoder == NULL) return 0;
   return encoder->code;
 }
 
-int8_t InputHandler::getEncoderDirection(encoderCDT* encoder) {
+int8_t InputHandler::getEncoderDirection(encoderADT encoder) {
   if (encoder == NULL) return 0;
   return encoder->actualDirection;
 }
 
 // Private
-uint8_t InputHandler::updateEncoder(encoderCDT* encoder) {
+uint8_t InputHandler::updateEncoder(encoderADT encoder) {
     /*
      *  Declare MSB and LSB and store the value read from encoder pins.
      */

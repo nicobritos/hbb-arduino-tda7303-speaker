@@ -3,6 +3,8 @@
 
   #include "Arduino.h"
 
+  typedef struct encoderCDT *encoderADT;
+
   class InputHandler {
     private:
       uint8_t activePinsCount;
@@ -12,13 +14,13 @@
       uint8_t * pins;
       uint8_t count;
 
-      struct encoderCDT * encoders;
-      struct encoderCDT * activeEncoders;
+      encoderADT encoders;
+      encoderADT activeEncoders;
       uint8_t activeEncoderCount;
       uint8_t encoderCount;
       uint8_t currentEncoderLength;
       
-      uint8_t InputHandler::updateEncoder(encoderCDT* encoder);
+      uint8_t InputHandler::updateEncoder(encoderADT encoder);
 
     public:
       InputHandler();
@@ -31,9 +33,9 @@
       uint8_t getActivePinsCount();
       uint8_t getActiveEncoderCount();
       const uint8_t * readInputs();
-      const encoderCDT * readEncoders();
-      int8_t getEncoderDirection(encoderCDT* encoder);
-      uint8_t getEncoderCode(encoderCDT* encoder);
+      const encoderADT readEncoders();
+      int8_t getEncoderDirection(encoderADT encoder);
+      uint8_t getEncoderCode(encoderADT encoder);
   };
   
 #endif
