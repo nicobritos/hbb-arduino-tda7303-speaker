@@ -14,8 +14,8 @@
       uint8_t * pins;
       uint8_t count;
 
-      encoderADT encoders;
-      encoderADT activeEncoders;
+      encoderADT *encoders;
+      encoderADT *activeEncoders;
       uint8_t activeEncoderCount;
       uint8_t encoderCount;
       uint8_t currentEncoderLength;
@@ -33,7 +33,7 @@
       uint8_t getActivePinsCount();
       uint8_t getActiveEncoderCount();
       const uint8_t * readInputs();
-      const encoderADT readEncoders();
+      const encoderADT * readEncoders();
       int8_t getEncoderDirection(encoderADT encoder);
       uint8_t getEncoderCode(encoderADT encoder);
   };

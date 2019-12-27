@@ -19,8 +19,8 @@ InputHandler::InputHandler() {
   currentLenght = CHUNK;
   count = activePinsCount = 0;
 
-  activeEncoders = (encoderADT) malloc(CHUNK * (sizeof(*activeEncoders)));
-  encoders = (encoderADT) malloc(CHUNK * (sizeof(*encoders)));
+  activeEncoders = (encoderADT*) malloc(CHUNK * (sizeof(*activeEncoders)));
+  encoders = (encoderADT*) malloc(CHUNK * (sizeof(*encoders)));
   currentEncoderLength = CHUNK;
   encoderCount = activeEncoderCount = 0;
 }
@@ -61,8 +61,8 @@ void InputHandler::registerEncoder(uint8_t pin1, uint8_t pin2, uint8_t code, uin
   encoderCount++;
   if (encoderCount == currentEncoderLength) {
     currentEncoderLength += CHUNK;
-    activeEncoders = (encoderADT) realloc(activeEncoders, sizeof(*activeEncoders) * currentEncoderLength);
-    encoders = (encoderADT) realloc(encoders, sizeof(*encoders) * currentEncoderLength);
+    activeEncoders = (encoderADT*) realloc(activeEncoders, sizeof(*activeEncoders) * currentEncoderLength);
+    encoders = (encoderADT*) realloc(encoders, sizeof(*encoders) * currentEncoderLength);
   }
   encoders[encoderCount - 1] = {
     pin1,
@@ -99,7 +99,7 @@ uint8_t InputHandler::getActiveEncoderCount() {
   return activeEncoderCount;
 }
 
-const encoderADT InputHandler::readEncoders() {
+const encoderADT * InputHandler::readEncoders() {
   activeEncoderCount = 0;
   
   for (uint8_t ix = 0; ix < encoderCount; ix++) {
